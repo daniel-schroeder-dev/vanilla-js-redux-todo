@@ -6,6 +6,11 @@
 	cursor: pointer;
 }
 
+.todo-item[data-completed="true"] span:first-child {
+	text-decoration: line-through;
+	color: #888;
+}
+
 .remove-todo {
 	cursor: pointer;
 }
