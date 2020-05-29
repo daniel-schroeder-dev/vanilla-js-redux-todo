@@ -3,7 +3,8 @@ import { rootReducer } from './reducers.js';
 import { 
 	addTodo, 
 	removeTodo, 
-	toggleCompleted 
+	toggleCompleted,
+	toggleVisibility, 
 } from './action-creators.js';
 import TodoItem from './components/TodoItem/TodoItem.js';
 
@@ -20,7 +21,7 @@ const store = createStore(
 const unsubscribe = store.subscribe(() => {
 	const state = store.getState();
 	todoList.innerHTML = '';
-	state.forEach(todo => {
+	state.todos.forEach(todo => {
 		new TodoItem(todo, todoList).render();
 	});
 });
@@ -32,7 +33,7 @@ form.addEventListener('submit', e => {
 });
 
 visibilityToggle.addEventListener('change', e => {
-	store.dispatch({ type: 'TOGGLE_VISIBILITY', visibility: e.target.value })
+	store.dispatch(toggleVisibility(e.target.value));
 });
 
 todoList.addEventListener('click', e => {

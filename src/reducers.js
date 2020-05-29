@@ -2,9 +2,10 @@ import {
 	ADD_TODO, 
 	REMOVE_TODO,
 	TOGGLE_COMPLETED,
+	TOGGLE_VISIBILITY,
 } from './action-constants.js';
 
-export function rootReducer(state = [], action) {
+function todoReducer(state = [], action) {
 	switch (action.type) {
 		case ADD_TODO:
 			return [
@@ -22,4 +23,10 @@ export function rootReducer(state = [], action) {
 		default:
 			return state;
 	}
+}
+
+export function rootReducer(state = {}, action) {
+	return {
+		todos: todoReducer(state.todos, action),
+	};
 }
