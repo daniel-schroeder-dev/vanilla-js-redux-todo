@@ -3,6 +3,7 @@ import {
 	REMOVE_TODO,
 	TOGGLE_COMPLETED,
 	TOGGLE_VISIBILITY,
+	VisibilityConstants,
 } from './action-constants.js';
 
 function todoReducer(state = [], action) {
@@ -25,8 +26,18 @@ function todoReducer(state = [], action) {
 	}
 }
 
+function visibilityReducer(state = VisibilityConstants.SHOW_ALL, action) {
+	switch (action.type) {
+		case TOGGLE_VISIBILITY:
+			return action.visibility;
+		default:
+			return state;
+	}
+}
+
 export function rootReducer(state = {}, action) {
 	return {
 		todos: todoReducer(state.todos, action),
+		visibility: visibilityReducer(state.visibility, action),
 	};
 }
