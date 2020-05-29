@@ -8,7 +8,6 @@ import {
 } from './action-creators.js';
 
 import { VisibilityConstants } from './action-constants';
-
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_INCOMPLETE } = VisibilityConstants;
 
 import TodoItem from './components/TodoItem/TodoItem.js';
@@ -27,8 +26,7 @@ const unsubscribe = store.subscribe(renderTodos);
 
 form.addEventListener('submit', createTodo);
 visibilityToggle.addEventListener('change', toggleTodoVisibility);
-
-todoList.addEventListener('click', );
+todoList.addEventListener('click', toggleTodoStatus);
 
 function toggleTodoStatus(e) {
 	if (e.target.classList.contains('remove-todo')) {
