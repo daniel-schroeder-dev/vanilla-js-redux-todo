@@ -23,7 +23,34 @@ const store = createStore(
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
-const unsubscribe = store.subscribe(() => {
+const unsubscribe = store.subscribe(renderTodos);
+
+form.addEventListener('submit', createTodo);
+visibilityToggle.addEventListener('change', toggleTodoVisibility);
+
+todoList.addEventListener('click', );
+
+function toggleTodoStatus(e) {
+	if (e.target.classList.contains('remove-todo')) {
+		const id = +e.target.parentElement.dataset.id;
+		store.dispatch(removeTodo(id));
+	} else if (e.target.classList.contains('todo-item') || e.target.parentElement.classList.contains('todo-item')) {
+		const target = e.target.classList.contains('todo-item') ? e.target : e.target.parentElement;
+		store.dispatch(toggleCompleted(+target.dataset.id));
+	}
+}
+
+function toggleTodoVisibility(e) {
+	store.dispatch(toggleVisibility(e.target.value));
+}
+
+function createTodo(e) {
+	e.preventDefault();
+	store.dispatch(addTodo(createTodoInput.value));
+	createTodoInput.value = '';
+}
+
+function renderTodos() {
 	const state = store.getState();
 	todoList.innerHTML = '';
 	state.todos
@@ -35,25 +62,4 @@ const unsubscribe = store.subscribe(() => {
 		.forEach(todo => {
 			new TodoItem(todo, todoList).render();
 		});
-});
-
-form.addEventListener('submit', e => {
-	e.preventDefault();
-	store.dispatch(addTodo(createTodoInput.value));
-	createTodoInput.value = '';
-});
-
-visibilityToggle.addEventListener('change', e => {
-	store.dispatch(toggleVisibility(e.target.value));
-});
-
-todoList.addEventListener('click', e => {
-	if (e.target.classList.contains('remove-todo')) {
-		const id = +e.target.parentElement.dataset.id;
-		store.dispatch(removeTodo(id));
-	} else if (e.target.classList.contains('todo-item') || e.target.parentElement.classList.contains('todo-item')) {
-		const target = e.target.classList.contains('todo-item') ? e.target : e.target.parentElement;
-		store.dispatch(toggleCompleted(+target.dataset.id));
-	}
-});
-
+}
