@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { addTodo } from './actions.js';
+import { addTodo } from './action-creators.js';
 import { rootReducer } from './reducers.js';
 import TodoItem from './components/TodoItem/TodoItem.js';
 
@@ -24,5 +24,12 @@ form.addEventListener('submit', e => {
 	e.preventDefault();
 	store.dispatch(addTodo(createTodoInput.value));
 	createTodoInput.value = '';
+});
+
+todoList.addEventListener('click', e => {
+	if (e.target.classList.contains('remove-todo')) {
+		const id = +e.target.parentElement.dataset.id;
+		store.dispatch({ type: 'REMOVE_TODO', id });
+	}
 });
 

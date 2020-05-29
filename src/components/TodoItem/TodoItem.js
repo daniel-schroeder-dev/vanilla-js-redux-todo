@@ -6,20 +6,25 @@ class TodoItem {
 		this.description = todo.description;
 		this.id = todo.id;
 		this.container = container;
+		this.element = this._createElement();
 	}
 
-	render() {
+	_createElement() {
 		const li = document.createElement('li');
 		const todoItemSpan = document.createElement('span');
 		const removeItemSpan = document.createElement('span');
 		li.classList.add('todo-item');
 		li.dataset.id = this.id;
-		removeItemSpan.classList.add('remove-item');
+		removeItemSpan.classList.add('remove-todo');
 		todoItemSpan.textContent = this.description;
 		removeItemSpan.textContent = 'X';
 		li.appendChild(todoItemSpan);
 		li.appendChild(removeItemSpan);
-		this.container.appendChild(li);
+		return li;
+	}
+
+	render() {
+		this.container.appendChild(this.element);
 	}
 
 }
