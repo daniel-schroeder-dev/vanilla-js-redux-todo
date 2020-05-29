@@ -6,6 +6,11 @@ import {
 	toggleCompleted,
 	toggleVisibility, 
 } from './action-creators.js';
+
+import { VisibilityConstants } from './action-constants';
+
+const { SHOW_ALL, SHOW_COMPLETED, SHOW_INCOMPLETE } = VisibilityConstants;
+
 import TodoItem from './components/TodoItem/TodoItem.js';
 
 const form = document.querySelector('form');
@@ -21,9 +26,15 @@ const store = createStore(
 const unsubscribe = store.subscribe(() => {
 	const state = store.getState();
 	todoList.innerHTML = '';
-	state.todos.forEach(todo => {
-		new TodoItem(todo, todoList).render();
-	});
+	state.todos
+		.filter(todo => {
+			if (state.visibility === SHOW_ALL) return true;
+			if (state.visibility === SHOW_COMPLETED) return todo.completed;
+			if (state.visibility === SHOW_INCOMPLETE) return !todo.completed;
+		})
+		.forEach(todo => {
+			new TodoItem(todo, todoList).render();
+		});
 });
 
 form.addEventListener('submit', e => {
