@@ -6,11 +6,10 @@ import {
 	toggleCompleted,
 	toggleVisibility, 
 } from './action-creators.js';
-
 import { VisibilityConstants } from './action-constants';
-const { SHOW_ALL, SHOW_COMPLETED, SHOW_INCOMPLETE } = VisibilityConstants;
-
 import TodoItem from './components/TodoItem/TodoItem.js';
+
+const { SHOW_ALL, SHOW_COMPLETED, SHOW_INCOMPLETE } = VisibilityConstants;
 
 const form = document.querySelector('form');
 const createTodoInput = document.getElementById('createTodo');
