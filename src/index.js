@@ -6,6 +6,7 @@ import TodoItem from './components/TodoItem/TodoItem.js';
 const form = document.querySelector('form');
 const createTodoInput = document.getElementById('createTodo');
 const todoList = document.getElementById('todoList');
+const visibilityToggle = document.getElementById('visibilityToggle');
 
 const store = createStore(
 	rootReducer,
@@ -24,6 +25,10 @@ form.addEventListener('submit', e => {
 	e.preventDefault();
 	store.dispatch(addTodo(createTodoInput.value));
 	createTodoInput.value = '';
+});
+
+visibilityToggle.addEventListener('change', e => {
+	console.log(e.target.value);
 });
 
 todoList.addEventListener('click', e => {
