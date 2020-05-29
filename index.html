@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Redux Todo App</title>
+</head>
+<body>
+
+	<form>
+		<label for="createTodo">Create Todo:
+			<input type="text" name="createTodo" id="createTodo" autocomplete="off" />
+		</label>
+	</form>
+
+	<div id="visibilityToggle">
+		<label for="showAll">
+			Show All:
+			<input type="radio" name="visibilityToggle" id="showAll" value="SHOW_All" checked />
+		</label>
+		<label for="showCompleted">
+			Show Completed:
+			<input type="radio" name="visibilityToggle" id="showCompleted" value="SHOW_COMPLETED" />
+		</label>
+		<label for="showIncomplete">
+			Show Incomplete:
+			<input type="radio" name="visibilityToggle" id="showIncomplete" value="SHOW_INCOMPLETE" />
+		</label>
+	</div>
+
+	<ul id="todoList">
+	</ul>
+
+<script type="text/javascript" src="./dist/bundle.js"></script>
+</body>
+</html>
