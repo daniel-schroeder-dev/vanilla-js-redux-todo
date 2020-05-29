@@ -1,6 +1,10 @@
 import { createStore } from 'redux';
-import { addTodo, removeTodo } from './action-creators.js';
 import { rootReducer } from './reducers.js';
+import { 
+	addTodo, 
+	removeTodo, 
+	toggleCompleted 
+} from './action-creators.js';
 import TodoItem from './components/TodoItem/TodoItem.js';
 
 const form = document.querySelector('form');
@@ -28,13 +32,16 @@ form.addEventListener('submit', e => {
 });
 
 visibilityToggle.addEventListener('change', e => {
-	console.log(e.target.value);
+	store.dispatch({ type: 'TOGGLE_VISIBILITY', visibility: e.target.value })
 });
 
 todoList.addEventListener('click', e => {
 	if (e.target.classList.contains('remove-todo')) {
 		const id = +e.target.parentElement.dataset.id;
 		store.dispatch(removeTodo(id));
+	} else if (e.target.classList.contains('todo-item') || e.target.parentElement.classList.contains('todo-item')) {
+		const target = e.target.classList.contains('todo-item') ? e.target : e.target.parentElement;
+		store.dispatch(toggleCompleted(+target.dataset.id));
 	}
 });
 
