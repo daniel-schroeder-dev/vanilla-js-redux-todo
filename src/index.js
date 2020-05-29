@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { addTodo } from './action-creators.js';
+import { addTodo, removeTodo } from './action-creators.js';
 import { rootReducer } from './reducers.js';
 import TodoItem from './components/TodoItem/TodoItem.js';
 
@@ -29,7 +29,7 @@ form.addEventListener('submit', e => {
 todoList.addEventListener('click', e => {
 	if (e.target.classList.contains('remove-todo')) {
 		const id = +e.target.parentElement.dataset.id;
-		store.dispatch({ type: 'REMOVE_TODO', id });
+		store.dispatch(removeTodo(id));
 	}
 });
 
