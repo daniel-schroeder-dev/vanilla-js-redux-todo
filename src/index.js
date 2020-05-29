@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { addTodo } from './actions.js';
 import TodoItem from './components/TodoItem/TodoItem.js';
 
 const todoListContainer = document.getElementById('todoList');
@@ -12,7 +13,7 @@ const store = createStore(
 
 form.addEventListener('submit', e => {
 	e.preventDefault();
-	store.dispatch({ type: 'ADD_TODO', description: createTodoInput.value });
+	store.dispatch(addTodo(createTodoInput.value));
 });
 
 function rootReducer(state = [], action) {
