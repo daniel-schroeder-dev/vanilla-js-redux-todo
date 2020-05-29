@@ -2,8 +2,9 @@ import './TodoItem.css';
 
 class TodoItem {
 
-	constructor(description, container) {
-		this.description = description;
+	constructor(todo, container) {
+		this.description = todo.description;
+		this.id = todo.id;
 		this.container = container;
 	}
 
@@ -12,6 +13,7 @@ class TodoItem {
 		const todoItemSpan = document.createElement('span');
 		const removeItemSpan = document.createElement('span');
 		li.classList.add('todo-item');
+		li.dataset.id = this.id;
 		removeItemSpan.classList.add('remove-item');
 		todoItemSpan.textContent = this.description;
 		removeItemSpan.textContent = 'X';
